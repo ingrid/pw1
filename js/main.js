@@ -19,7 +19,11 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
     player.prototype.reset = function(){
       this.path.term = util.approx(this.tdt);
 
-      var gho = new ghost(this.path, 0, 0 ,0);
+      var hue = this.ghost_color % 360;
+      var c = util.hsv_to_rgb(hue, 1, 1);
+      var gho = new ghost(this.path, c.r, c.g, c.b);
+
+      this.ghosts.push(gho);
 
       this.x = this.init.x;
       this.y = this.init.y;
@@ -31,6 +35,11 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
         x: this.init.x,
         y: this.init.y
       };
+      this.ghost_color += 60;
+
+      for (g in this.ghosts){
+        this.ghosts[g].tdt = 0;
+      }
 
       s.add(gho)
     };
@@ -57,10 +66,10 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
 
   preload();
 
-  /**/
+  /** /
   window.setTimeout(function(){
     window.console.log = function(){
     };
-  }, 300000);
+  }, 3000);
   /**/
 });

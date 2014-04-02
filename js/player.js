@@ -11,6 +11,8 @@ define(["jam", "./proto", "./util", "./ghost"], function(jam, proto, util) {
 
 	this.acceleration.y = 250;
     this.speed = 100;
+    this.ghost_color = 0;
+    this.ghosts = [];
 
     this.tdt = 0.0;
     this.path = {};
