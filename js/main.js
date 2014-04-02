@@ -2,7 +2,9 @@ require.config({
   baseUrl:"jam/",
 });
 
-require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level", "../js/goal"], function(jam, syl, proto, player, level, goal) {
+var p;
+
+require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level", "../js/goal", "../js/util", "../js/ghost"], function(jam, syl, proto, player, level, goal, util, ghost) {
   jam.config({dataDir:"data/"});
 
   var main = function() {
@@ -11,21 +13,34 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
     g.bgColor = "rgb(55, 55, 55)";
 
     var l = new level();
-    var p = new player(20, 10, l);
+    p = new player(20, 10);
     var e = new goal(600, 235);
 
+    player.prototype.reset = function(){
+      this.path.term = util.approx(this.tdt);
 
-    p.on("update", function(dt) {
+      var gho = new ghost(this.path, 0, 0 ,0);
+
+      this.x = this.init.x;
+      this.y = this.init.y;
+      this.tdt = 0;
+      this.path = {};
+      this.path.term = 0;
+      this.path.steps = {};
+      this.path.steps[0] = {
+        x: this.init.x,
+        y: this.init.y
+      };
+
+      s.add(gho)
+    };
+
+    p.on_update = function(dt) {
       jam.Rect.collide(p, l);
-	  if (p.touchingBottom) {
-        p.grounded = true;
-      } else {
-        p.grounded = false;
-        }
  	  if (jam.Rect.collide(p, e)) {
-        console.log("win");
+        p.reset();
       }
-    });
+    };
 
     s.add(l);
     s.add(p);
@@ -42,10 +57,10 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
 
   preload();
 
-  /** /
+  /**/
   window.setTimeout(function(){
     window.console.log = function(){
     };
-  }, 300);
+  }, 300000);
   /**/
 });
