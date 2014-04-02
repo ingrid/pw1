@@ -10,11 +10,13 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
 	var s = g.root.scene;
     g.bgColor = "rgb(55, 55, 55)";
 
-    var l = new level(p);
+    var l = new level();
     var p = new player(20, 10, l);
 
     s.add(l);
     s.add(p);
+
+    g.camera.follow = p;
 
 	g.run();
   };
@@ -24,4 +26,9 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
   };
 
   preload();
+
+  window.setTimeout(function(){
+    window.console.log = function(){
+    };
+  }, 300);
 });

@@ -8,6 +8,14 @@ define(["vector", "sprite", "input", "util"], function(Vector, Sprite, Input, Ut
 	this._context = this._canvas.getContext("2d");
  	this.hasFocus = false;
 
+    this.camera = {
+      scroll: new Vector(0,0),
+      size: new Vector(width, height),
+      follow: null
+    };
+    this.width = width;
+    this.height = height;
+
 	zoom = zoom || 1;
 
 	this.root = new Sprite(0,0);
@@ -73,6 +81,12 @@ define(["vector", "sprite", "input", "util"], function(Vector, Sprite, Input, Ut
 
 	this.time = (currentTime - startTime) / 1000.0;
 
+    if(this.camera.follow !== null){
+      this.camera.scroll.x = this.camera.follow.x - (this.width / 2);
+      console.log(this.camera.scroll);
+      this.camera.scroll.y = this.camera.follow.y - (this.height / 2);
+    }
+
 	if(this.hasFocus) {
 	  this.root.update(this.elapsed);
 	  Input.update(this);
@@ -87,8 +101,9 @@ define(["vector", "sprite", "input", "util"], function(Vector, Sprite, Input, Ut
 	ctx.save();
 	ctx.fillStyle = this.bgColor;
 	ctx.fillRect(0,0,this.width,this.height);
-
-	this.root.render(ctx);
+    this.root.x = -this.camera.scroll.x;
+    this.root.y = -this.camera.scroll.y;
+	this.root.render(ctx, this.camera);
 	ctx.restore();
   };
 
