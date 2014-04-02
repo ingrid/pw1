@@ -83,7 +83,6 @@ define(["vector", "sprite", "input", "util"], function(Vector, Sprite, Input, Ut
 
     if(this.camera.follow !== null){
       this.camera.scroll.x = this.camera.follow.x - (this.width / 2);
-      console.log(this.camera.scroll);
       this.camera.scroll.y = this.camera.follow.y - (this.height / 2);
     }
 

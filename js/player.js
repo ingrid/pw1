@@ -7,8 +7,9 @@ define(["jam", "../js/proto"], function(jam, proto) {
 
 	this.acceleration.y = 250;
     this.speed = 100;
+    this.grounded = false;
+
     this.on("update", function(dt) {
-	  jam.Rect.collide(this, tm);
 	  if(jam.Input.down("LEFT")) {
 		this.velocity.x = -this.speed;
         this.facing = jam.Sprite.LEFT;
@@ -20,7 +21,10 @@ define(["jam", "../js/proto"], function(jam, proto) {
 	  else {
 		this.velocity.x = 0;
 	  }
-	  if(jam.Input.justPressed("UP")) {
+	  if(jam.Input.justPressed("UP")
+         && this.grounded
+         && !(jam.Input.down("RIGHT") || jam.Input.down("LEFT"))
+        ) {
 		this.velocity.y = -100;
 	  }
     });

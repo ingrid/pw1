@@ -1,7 +1,7 @@
 define(["util", "../lib/sylvester"], function(Util, Syl) {
 	var self = {};
 
-	var packRecursive = function(obj_or_list) { 
+	var packRecursive = function(obj_or_list) {
 		var ret = [];
 		var list = [];
 		if(obj_or_list.length) {
@@ -32,8 +32,8 @@ define(["util", "../lib/sylvester"], function(Util, Syl) {
 		for(var i = 0; i < g1.length; ++i) {
 			for(var j = 0; j < g2.length; ++j) {
 
-				var wsOffset1 = g1[i].getTransform().x(Syl.$V([0,0,1])); 
-				var wsOffset2 = g2[j].getTransform().x(Syl.$V([0,0,1])); 
+				var wsOffset1 = g1[i].getTransform().x(Syl.$V([0,0,1]));
+				var wsOffset2 = g2[j].getTransform().x(Syl.$V([0,0,1]));
 
 				var x1 = g1[i]._collisionOffsetX + wsOffset1.elements[0];
 				var y1 = g1[i]._collisionOffsetY + wsOffset1.elements[1];
@@ -72,8 +72,8 @@ define(["util", "../lib/sylvester"], function(Util, Syl) {
 		else if(s2.immovable) { staticCo1 = 1.0; staticCo2 = 0.0;}
 		else { staticCo1 = 0.5; staticCo2 = 0.5; }
 
-		var wsOffset1 = s1.getTransform().x(Syl.$V([0,0,1])); 
-		var wsOffset2 = s2.getTransform().x(Syl.$V([0,0,1])); 
+		var wsOffset1 = s1.getTransform().x(Syl.$V([0,0,1]));
+		var wsOffset2 = s2.getTransform().x(Syl.$V([0,0,1]));
 
 		var x1 = wsOffset1.elements[0] + s1._collisionOffsetX;
 		var y1 = wsOffset1.elements[1] + s1._collisionOffsetY;
@@ -94,7 +94,7 @@ define(["util", "../lib/sylvester"], function(Util, Syl) {
 		var minVertSep = (penBottom < -penTop ? penBottom : penTop);
 
 		// Separate the objects, reset their velocities
-		// and set the touching flags.    
+		// and set the touching flags.
 		if(Math.abs(minHorizSep) < Math.abs(minVertSep)){
 			if ( minHorizSep > 0 ) {
 				s1.touchingLeft = true;

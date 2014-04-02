@@ -214,6 +214,10 @@ define(["util", "vector", "../lib/sylvester"], function(Util, Vector, Syl) {
 
   // Handle simple physics every tick.
   sprite.prototype.update = function(elapsed){
+	this.touchingTop = false;
+  	this.touchingBottom = false;
+ 	this.touchingLeft = false;
+ 	this.touchingRight = false;
 	// This filter just says "only leave me if i'm not in the remove list"
 	this.subSprites = this.subSprites.filter(
 	  function(x,i,a) {
