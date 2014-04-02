@@ -22,6 +22,10 @@ define([], function() {
   };
 
   proto.sq = function(s, r, g, b) {
+    return proto.rect(s, s, r, g, b);
+  };
+
+  proto.cir = function(r, r, g, b) {
 
   };
 

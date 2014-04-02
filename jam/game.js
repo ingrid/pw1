@@ -6,7 +6,7 @@ define(["vector", "sprite", "input", "util"], function(Vector, Sprite, Input, Ut
 	this._canvas.style.position = "relative";
 	this._canvas.style.border = "1px solid black";
 	this._context = this._canvas.getContext("2d");
-	this.hasFocus = false;
+ 	this.hasFocus = false;
 
 	zoom = zoom || 1;
 

@@ -14,7 +14,9 @@ define([], function() {
 
 	// Loads and caches image files or sound files.
 	lib.load = function(url, onload){
+      if (!url.match(/^data:/)){
 		url = lib.dataDir + url;
+      }
 		if(lib.cache[url] !== undefined) {
 			onload(lib.cache[url]);
 			return;
@@ -26,9 +28,7 @@ define([], function() {
 		// IMAGE
         //if(url.match(/\.(jpeg|jpg|png|gif)(\?.*)?$/)){
         if(url.match(/\.(jpeg|jpg|png|gif)(\?.*)?$/) || url.match(/^data:image/)){
-          console.log('match?');
 			obj = new Image(url);
-          console.log(obj);
 			obj.onload = function(){ onload(obj); };
 			obj.src = url;
 			lib.cache[url] = obj;

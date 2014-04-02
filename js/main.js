@@ -6,15 +6,15 @@ require(["jam", "../lib/sylvester", "../js/proto", "../js/player", "../js/level"
   jam.config({dataDir:"data/"});
 
   var main = function() {
-	var g = new jam.Game(320, 240, document.body, 2);
+	var g = new jam.Game(640, 480, document.body);
 	var s = g.root.scene;
     g.bgColor = "rgb(55, 55, 55)";
 
-    var p = new player(10, 10);
-    var l = new level();
+    var l = new level(p);
+    var p = new player(20, 10, l);
 
-    s.add(p);
     s.add(l);
+    s.add(p);
 
 	g.run();
   };
