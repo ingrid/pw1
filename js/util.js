@@ -35,9 +35,6 @@ define([], function() {
       var x = c * (1 - Math.abs(((h/60) % 2) - 1));
       var m = v - c;
 
-      console.log(c);
-      console.log(x);
-      console.log(m);
       switch(i){
       case 0:
         r = c;
